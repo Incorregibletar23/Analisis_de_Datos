@@ -15,3 +15,4 @@ B = np.array([8,-11,-3], dtype = float)
 sol = gaussJordan(A, B)
 print("Solucion:")
 print(f' x = {sol[0]: 2f}, y = {sol[1] : 2f}, z = {sol[2] : 2f}')
+

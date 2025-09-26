@@ -1,0 +1,31 @@
+import numpy as np
+def jacobi(mCoef, mTer, error):
+    nfilas, ncol = mCoef.shape
+    result1 = np.zeros(nfilas)
+    result2 = np.zeros(nfilas)
+    bError = 1
+    cont = 0
+    while bError == 1:
+        result2[:]=mTer[:]
+        for fila in range(nfilas):
+            for col in range (ncol):
+                if fila != col:
+                    result2[fila] += (-1)*mCoef[fila, col]*result1[col]
+            result2[fila]/= mCoef[fila, fila]
+        if cont >= 1:
+            bError= 0
+        for columna in range(ncol):
+            if abs(result2[columna]-result1[columna]) > bError:
+                bError=1
+        cont +=1
+        result1[:] = result2[:]
+    print('Numero de iteraciones', cont)
+    return result2
+    
+A = np.array([[7,1,-2],
+    [-3, -5, 1],
+    [2,2,-6]
+    ], dtype = float)
+B = np.array([5, -20, -8], dtype = float)
+x = jacobi(A,B,.001)
+print('Metodo Jacobi', x)
